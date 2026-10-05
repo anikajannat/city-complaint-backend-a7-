@@ -1,3 +1,5 @@
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger";
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -28,6 +30,11 @@ const getParam = (value: string | string[] | undefined): string => {
 };
 
 const app = express();
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec)
+);
 
 app.use(helmet());
 
